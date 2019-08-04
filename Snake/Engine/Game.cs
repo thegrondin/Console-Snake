@@ -14,9 +14,7 @@ namespace Snake.Engine
         public static BoardRenderer Renderer { get; set; }
         public static Entities.Snake Snake { get; set; }
         public static Food Food { get; set; }
-
         public static Block TestBlocks { get; set; }
-
         public static int Size { get; set; }
         public static bool Started = false;
         public static Move CurrentMove { get; set; } = new Move(0, 0);
@@ -24,22 +22,16 @@ namespace Snake.Engine
         public static void Initialize(int size)
         {
             Size = size;
-
             Snake = new Entities.Snake(new Position { X = 5, Y = Size / 2 });
-
             var foodInitialRandom = new Random();
 
             Food = new Food(new Position { X = foodInitialRandom.Next(0, Size), Y = foodInitialRandom.Next(0, Size) });
-
-            TestBlocks =  new Block(new Position(0, 7));
 
             Renderer = new BoardRenderer(Size);
             Renderer
                 .AddBlocks(Snake.GetBlocks(), 0)
                 .AddBlock(Food.GetBlock(), 1)
                 .Render();
-            
-
         }
 
         public static void Loop()
@@ -48,12 +40,8 @@ namespace Snake.Engine
 
             while (true)
             {
-
                 Console.Clear();
-
-                var moveMode = new Position();
-
-
+               
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey(true);
@@ -82,25 +70,17 @@ namespace Snake.Engine
                         default:
                             break;
                     }
-
-                   
                 }
-
-
 
                 if (Started)
                 {
                     Snake.Move(Snake.GetHead().Position.X + CurrentMove.X, Snake.GetHead().Position.Y + CurrentMove.Y);
-
                 }
-
 
                 if (Snake.HasCollision())
                 {
                     break;
-                    
                 }
-
 
                 if (Snake.GetHead().Position.X == Food.GetBlock().Position.X && Snake.GetHead().Position.Y == Food.GetBlock().Position.Y)
                 {
@@ -116,8 +96,6 @@ namespace Snake.Engine
                      .ClearSlot(0)
                      .AddBlocks(Snake.GetBlocks(), 0)
                      .Render();
-
-
                 interation++;
                 Thread.Sleep(200);
             }

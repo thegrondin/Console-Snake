@@ -7,23 +7,12 @@ using System.Text;
 namespace Snake.Rendering
 {
 
-    struct Cell
-    {
-        List<Block> Blocks { get; set; }
-    }
-
     class BoardRenderer
     {
-
         public static char UnicodeBox = '\u2596';
-
         public List<(int Id, List<dynamic> Elements)> MemorySlots { get; set; }
-
         public Char[,] Board { get; set; }
-
         public int Size { get; set; }
-
-       
 
         public void Render()
         {
@@ -39,7 +28,6 @@ namespace Snake.Rendering
                     if (currentElement.GetType() == typeof(List<Block>))
                     {
                         List<Block> blocks = Convert.ChangeType(currentElement, typeof(List<Block>)) as List<Block>;
-
                         for (int b = 0; b < blocks.Count; b++)
                         {
                             var block = blocks[b];
@@ -49,28 +37,23 @@ namespace Snake.Rendering
                     else
                     {
                         var block = Convert.ChangeType(currentElement, typeof(Block)) as Block;
-
                         Board[block.Position.Y, block.Position.X] = UnicodeBox;
                     }
                 }
             }
 
             var boardOutput = "";
-
             for (int k = 0; k < Board.GetLength(0); k++)
             {
                 for (int l = 0; l < Board.GetLength(1); l++)
                 {
                     boardOutput += Board[k, l];
-                    
                 }
 
                 boardOutput += '\n';
             }
 
-            Console.Write(boardOutput);
-
-          
+            Console.Write(boardOutput);      
         }
 
         public BoardRenderer(int size)
@@ -83,7 +66,6 @@ namespace Snake.Rendering
         public void Initialize()
         {
             MemorySlots = new List<(int Id, List<dynamic> Elements)>();
-
             ClearBoard();
         }
 
@@ -107,7 +89,6 @@ namespace Snake.Rendering
         public BoardRenderer ClearSlot(int id)
         {
             var el = MemorySlots.Where(x => x.Id == id).FirstOrDefault();
-
             MemorySlots.Remove(el);
             return this;
         }
@@ -144,9 +125,6 @@ namespace Snake.Rendering
             {
                 MemorySlots.Add((id, new List<dynamic> { blocks }));
             }
-
-
-
             return this;
         }
     }

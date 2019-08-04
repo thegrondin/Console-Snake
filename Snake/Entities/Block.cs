@@ -6,11 +6,8 @@ namespace Snake.Entities
 {
     class Block
     {
-        //@TODO: FIX
         public bool IsHead { get; set; }
-
         public Position Position { get; set; }
-
         public int Id { get; set; }
 
         public Block (Position position, bool isHead = false)

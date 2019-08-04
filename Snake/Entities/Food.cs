@@ -7,9 +7,6 @@ namespace Snake.Entities
 {
     class Food
     {
-
-
-
         public Block Block { get; set; } 
 
         public Food(Position Position)
